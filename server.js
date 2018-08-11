@@ -14,10 +14,15 @@ var dbs = {}
 
 expressWS(app)
 
-app.ws('/db/:key', wsRoute)
+app.ws('/db/:key', wsDB)
+app.ws('/players/:key', wsPlayers)
 app.listen(PORT, () => console.log('listening at', PORT))
 
-function wsRoute (ws, req) {
+function wsPlayers (ws, req) {
+
+}
+
+function wsDB (ws, req) {
   var { key } = req.params
   var db
 
