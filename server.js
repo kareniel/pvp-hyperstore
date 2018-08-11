@@ -14,36 +14,8 @@ var dbs = {}
 
 expressWS(app)
 
-app.post('/db/:key', post)
-app.get('/db/:key', get)
 app.ws('/db/:key', wsRoute)
 app.listen(PORT, () => console.log('listening at', PORT))
-
-function post (req, res, next) {
-  var { key } = req.params
-  var { local } = req.query
-
-  var db = dbs[key]
-
-  if (db) {
-    db.localKeys.push(local)
-    res.end()
-  } else {
-    res.end()
-  }
-}
-
-function get (req, res, next) {
-  var { key } = req.params
-
-  var db = dbs[key]
-
-  if (db) {
-    res.end(JSON.stringify(db.localKeys))
-  } else {
-    res.end()
-  }
-}
 
 function wsRoute (ws, req) {
   var { key } = req.params
